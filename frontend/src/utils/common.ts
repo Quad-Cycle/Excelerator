@@ -1,0 +1,31 @@
+export const textColors: Record<string, string> = {
+  red: '#db1824',
+  blue: '#0d68fc',
+  geekblue: '#1c20ba',
+  green: '#009717',
+  lime: '#61ae18',
+  purple: '#5a0ca5',
+  orange: '#de651d',
+  gold: '#da801a',
+  magenta: '#ce1374',
+  cyan: '#008c91',
+  grey: '#cccccc',
+  primary: '#2E3192',
+  white: '#fff',
+};
+
+export const colors: Record<string, string> = {
+  red: '#ffefee',
+  blue: '#dff2ff',
+  geekblue: '#edf3ff',
+  green: '#f2ffeb',
+  lime: '#fbffe3',
+  purple: '#faedff',
+  orange: '#fff7e3',
+  gold: '#fffbe3',
+  magenta: '#ffedf5',
+  cyan: '#dcfffa',
+  grey: '#fcfdff',
+  primary: '#2E3192',
+  white: '#fff',
+};

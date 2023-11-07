@@ -1,0 +1,125 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Nav from '../components/Nav';
+import Guides from '../components/Guides';
+import { ReactComponent as Logo } from '../assets/logo.svg';
+import Banner from '../components/Banner';
+import Command from '../components/Command';
+import Input from '../components/TextField';
+import Icon from '../components/Icon';
+// import Result from '../components/Result';
+import Request from '../components/Request';
+import Button from '../components/Button';
+
+function Main() {
+  // 임시 데이터
+  const [reqNum, setReqNum] = useState(0);
+  const requests: RequestType[] = [
+    { request: '엑셀에서 데이터를 가진 전체 범위(데이터베이스)를 지정해주세요.', type: 'database' },
+    { request: '값을 더해나갈 특정 필드를 선택하세요.', type: 'field' },
+    { request: '더하는 조건을 범위로 설정합니다.', type: 'criteria' },
+    { request: '구한 결과 값을 작성할 셀의 위치를 지정하세요.', type: 'result' },
+  ];
+
+  const handlePrevRequest = () => {
+    if (reqNum === 0) return;
+    setReqNum((prev) => prev - 1);
+  };
+
+  const handleNextRequest = () => {
+    if (reqNum == requests.length - 1) return;
+    setReqNum((prev) => prev + 1);
+  };
+
+  return (
+    <MainBlock>
+      <Container>
+        <Nav />
+        <Contents>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          {/* Input용 */}
+          {/* <Banner
+            description={'Upload your'}
+            boldDescription={'excel file'}
+            bottomAddon={
+              <Button text={'Upload'} icon={'upload'} />
+            }
+          /> */}
+          {/* Output 용 */}
+          <Banner
+            description={'Download'}
+            boldDescription={'edited excel file'}
+            bottomAddon={
+              <BannerBottomAddon>
+                <Button text={'Download'} icon={'download'} />
+                <div>
+                  <Button text={'Continue'} icon={'continue'} />
+                  <Button text={'Rollback'} icon={'rollback'} />
+                </div>
+              </BannerBottomAddon>
+            }
+          />
+          <Command>Enter Request Action</Command>
+          <Input placeholder={'Enter a message'} rightAddon={<Icon name='send' size={20} />} />
+          {/* <Result>언어 모델 처리 및 분석 중입니다. 잠시만 기다려 주세요.</Result> */}
+          <Request
+            key={requests[reqNum].request}
+            index={reqNum}
+            lastIndex={requests.length - 1}
+            item={requests[reqNum]}
+            handlePrevRequest={handlePrevRequest}
+            handleNextRequest={handleNextRequest}
+          />
+        </Contents>
+        <Guides />
+      </Container>
+    </MainBlock>
+  );
+}
+
+export default Main;
+
+const MainBlock = styled.main`
+  width: 100%;
+  height: 100%;
+  background: var(--primary3);
+  box-sizing: border-box;
+  padding: 3rem;
+`;
+
+const Container = styled.section`
+  width: 100%;
+  height: 100%;
+  border-radius: 3.125rem;
+  background: var(--primary2, #f6faff);
+  box-shadow: 0px 10px 30px 20px rgba(201, 201, 201, 0.25);
+  display: flex;
+`;
+
+const Contents = styled.section`
+  width: 100%;
+  flex: 1;
+  padding-top: 4rem;
+  padding: 4rem 3.5rem 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LogoWrapper = styled.div`
+  svg {
+    width: 12rem;
+  }
+`;
+
+const BannerBottomAddon = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+`;
