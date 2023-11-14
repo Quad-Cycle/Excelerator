@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { ChangeEvent, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Guides from '../components/Guides';
@@ -10,8 +11,17 @@ import Icon from '../components/Icon';
 // import Result from '../components/Result';
 import Request from '../components/Request';
 import Button from '../components/Button';
+import Preview from '../components/Preview';
+import Result from '../components/Result';
+import * as XLSX from 'xlsx';
+import { useRecoilState } from 'recoil';
+import { spreadState, selectedFileState } from '../store/spread';
+import InputButton from '../components/InputButton';
 
 function Main() {
+  const previewRef = useRef<{ save: () => void }>({ save: () => {} });
+  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
+
   // 임시 데이터
   const [reqNum, setReqNum] = useState(0);
   const requests: RequestType[] = [
@@ -31,6 +41,11 @@ function Main() {
     setReqNum((prev) => prev + 1);
   };
 
+  function onSelectedFileChange(e: ChangeEvent<HTMLInputElement>) {
+    let selectedFile = e.target?.files?.[0];
+    selectedFile && setSelectedFile(selectedFile);
+  }
+
   return (
     <MainBlock>
       <Container>
@@ -40,38 +55,43 @@ function Main() {
             <Logo />
           </LogoWrapper>
           {/* Input용 */}
-          {/* <Banner
+          <Banner
             description={'Upload your'}
             boldDescription={'excel file'}
             bottomAddon={
-              <Button text={'Upload'} icon={'upload'} />
+              <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
             }
-          /> */}
+          />
+
+          {/* <Command>Enter Request Action</Command> */}
+          {/* <Input placeholder={'Enter a message'} rightAddon={<Icon name='send' size={20} />} /> */}
+          {/* <Result style={{ marginBottom: '2rem' }}>
+            언어 모델 처리 및 분석 중입니다. 잠시만 기다려 주세요.
+          </Result> */}
+
+          {<Preview forwardedRef={previewRef} />}
           {/* Output 용 */}
-          <Banner
+          {/* <Banner
             description={'Download'}
             boldDescription={'edited excel file'}
             bottomAddon={
               <BannerBottomAddon>
-                <Button text={'Download'} icon={'download'} />
+                <Button text={'Download'} icon={'download'} onClick={previewRef.current?.save} />
                 <div>
                   <Button text={'Continue'} icon={'continue'} />
                   <Button text={'Rollback'} icon={'rollback'} />
                 </div>
               </BannerBottomAddon>
             }
-          />
-          <Command>Enter Request Action</Command>
-          <Input placeholder={'Enter a message'} rightAddon={<Icon name='send' size={20} />} />
-          {/* <Result>언어 모델 처리 및 분석 중입니다. 잠시만 기다려 주세요.</Result> */}
-          <Request
+          /> */}
+          {/* <Request
             key={requests[reqNum].request}
             index={reqNum}
             lastIndex={requests.length - 1}
             item={requests[reqNum]}
             handlePrevRequest={handlePrevRequest}
             handleNextRequest={handleNextRequest}
-          />
+          /> */}
         </Contents>
         <Guides />
       </Container>
