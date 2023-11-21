@@ -1,0 +1,15 @@
+{
+    "SUM": [
+        {
+			"request": "합을 구할 범위를 지정해주세요",
+			"type":"database"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type":"field"
+		}
+    ],
+    "SUMIF": [
+
+    ]
+}
