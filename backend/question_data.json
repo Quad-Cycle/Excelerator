@@ -1,12 +1,12 @@
 {
 	"SUM": [
         {
-			"request": "합을 구할 범위를 지정해주세요",
-			"type":"database"
+			"request": "합을 구할 범위를 지정해주세요.",
+			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
-			"type":"field"
+			"request": "답을 입력할 곳을 지정해주세요.",
+			"type": "cell"
 		}
     ],
     "SUMIF": [
@@ -23,7 +23,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -33,7 +33,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "반올림하려는 자릿수를 입력해주세요. ",
+			"request": "반올림하려는 자릿수를 입력해주세요.",
 			"type": "number"
 		},
 		{
@@ -47,11 +47,11 @@
 			"type": "cell"
 		},
 		{
-			"request": "내림하려는 자릿수를 입력해주세요. ",
+			"request": "내림하려는 자릿수를 입력해주세요.",
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -61,11 +61,11 @@
 			"type": "cell"
 		},
 		{
-			"request": "올림하려는 자릿수를 입력해주세요. ",
+			"request": "올림하려는 자릿수를 입력해주세요.",
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -75,7 +75,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -85,7 +85,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -95,7 +95,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -105,7 +105,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -115,13 +115,13 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
 	"PI": [
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -135,7 +135,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -145,7 +145,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -155,7 +155,7 @@
 			"type": "list"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -169,7 +169,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -183,7 +183,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -193,7 +193,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -203,7 +203,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -213,7 +213,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -231,7 +231,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -245,7 +245,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -259,7 +259,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -269,7 +269,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -279,7 +279,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -289,7 +289,7 @@
 			"type": "range"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -303,7 +303,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -321,7 +321,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -339,7 +339,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -357,7 +357,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -375,7 +375,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -393,7 +393,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -411,7 +411,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -429,7 +429,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -447,7 +447,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -465,7 +465,7 @@
 			"type": "criteria"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -475,7 +475,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -493,7 +493,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -511,7 +511,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -529,7 +529,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -543,7 +543,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -557,7 +557,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -567,7 +567,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -577,7 +577,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -587,7 +587,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -597,7 +597,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -607,7 +607,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -629,7 +629,7 @@
 			"type": "text"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -639,7 +639,7 @@
 			"type": "list"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -653,7 +653,7 @@
 			"type": "number"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -663,7 +663,7 @@
 			"type": "cell"
 		},
 		{
-			"request": "답을 입력할 곳을 지정해주세요",
+			"request": "답을 입력할 곳을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -685,7 +685,7 @@
 			"type": "boolean"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -707,7 +707,7 @@
 			"type": "boolean"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -721,7 +721,7 @@
 			"type": "list"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -739,7 +739,7 @@
 			"type": "number"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	],
@@ -757,13 +757,13 @@
 			"type": "number"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	],
 	"OFFSET": [
 		{
-			"request": "참조 할 시작지점을 지정해주세요. ",
+			"request": "참조 할 시작지점을 지정해주세요.",
 			"type": "cell"
 		},
     	{
@@ -783,7 +783,7 @@
 			"type": "number"
 		},
 		{
-			"request": "결과가 입력될 셀을 지정해주세요",
+			"request": "결과가 입력될 셀을 지정해주세요.",
 			"type": "cell"
 		}
 	]
