@@ -8,7 +8,6 @@ import Banner from '../components/Banner';
 import Command from '../components/Command';
 import Input from '../components/TextField';
 import Icon from '../components/Icon';
-// import Result from '../components/Result';
 import Request from '../components/Request';
 import Button from '../components/Button';
 import Preview from '../components/Preview';
@@ -21,27 +20,32 @@ import { resultMessage } from '../utils/common';
 import axios from 'axios';
 
 function Main() {
-  const previewRef = useRef<{ save: () => void }>({ save: () => {} });
+  const previewRef = useRef<{
+    save: () => void;
+    applyFormula: (func: string, parameters: string[], cell: string) => void;
+  }>({
+    save: () => {},
+    applyFormula: () => {},
+  });
+  const requestNumRef = useRef<number>(0);
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
   const [fileLoadedStatus, setFileLoadedStatus] = useRecoilState(FileLoadedState);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  // 임시 데이터
+  // const [selectedRange, setSelectedRange] = useState<string>('');
+  const [parameters, setParameters] = useState<string[]>([]);
+  const [requests, setRequests] = useState<RequestType[]>([]);
+  const [excelFunc, setExcelFunc] = useState<string>('');
   const [reqNum, setReqNum] = useState(0);
-  const requests: RequestType[] = [
-    { request: '엑셀에서 데이터를 가진 전체 범위(데이터베이스)를 지정해주세요.', type: 'database' },
-    { request: '값을 더해나갈 특정 필드를 선택하세요.', type: 'field' },
-    { request: '더하는 조건을 범위로 설정합니다.', type: 'criteria' },
-    { request: '구한 결과 값을 작성할 셀의 위치를 지정하세요.', type: 'result' },
-  ];
 
   const handlePrevRequest = () => {
-    if (reqNum === 0) return;
+    if (requestNumRef.current === 0) return;
+    requestNumRef.current -= 1;
     setReqNum((prev) => prev - 1);
   };
 
   const handleNextRequest = () => {
-    if (reqNum == requests.length - 1) return;
+    if (requestNumRef.current == requests.length - 1) return;
+    requestNumRef.current += 1;
     setReqNum((prev) => prev + 1);
   };
 
@@ -50,17 +54,46 @@ function Main() {
     selectedFile && setSelectedFile(selectedFile);
   }
 
-  function onSubmit() {
+  function onInputSubmit() {
     const enteredText = inputRef.current!.value;
     if (selectedFile && enteredText !== '') {
-      console.log(enteredText);
       setFileLoadedStatus('loading');
 
       axios.get('/api/text', { params: { text: enteredText } }).then((res) => {
-        console.log(res.data.data);
+        if (!res?.data) return;
+
+        const data = res.data;
+        const func = data.label;
+        const questions = data.question;
+
+        setFileLoadedStatus('loaded');
+        setRequests(questions);
+        setExcelFunc(func);
+        setParameters(Array(questions.length).fill(''));
+
+        setTimeout(() => {
+          setFileLoadedStatus('preview');
+        }, 1000);
       });
     }
   }
+
+  const handlePreview = (range: string) => {
+    setParameters((prevParameters) => {
+      const changed = [...prevParameters];
+      changed[requestNumRef.current] = range;
+      return changed;
+    });
+  };
+
+  const onSubmit = () => {
+    setFileLoadedStatus('edit');
+    previewRef.current?.applyFormula(
+      excelFunc,
+      parameters.slice(0, -1),
+      parameters[parameters.length - 1],
+    );
+  };
 
   return (
     <MainBlock>
@@ -70,63 +103,100 @@ function Main() {
           <LogoWrapper>
             <Logo />
           </LogoWrapper>
-          {/* Input용 */}
-          <Banner
-            description={'Upload your'}
-            boldDescription={'excel file'}
-            bottomAddon={
-              selectedFile ? (
-                <InputButton
-                  text={selectedFile.name}
-                  icon={'clip'}
-                  onChange={onSelectedFileChange}
-                />
-              ) : (
-                <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
-              )
-            }
-          />
+          {(fileLoadedStatus === 'ready' ||
+            fileLoadedStatus === 'loaded' ||
+            fileLoadedStatus === 'loading') && (
+            <>
+              <Banner
+                description={'Upload your'}
+                boldDescription={'excel file'}
+                bottomAddon={
+                  selectedFile ? (
+                    <InputButton
+                      text={selectedFile.name}
+                      icon={'clip'}
+                      onChange={onSelectedFileChange}
+                    />
+                  ) : (
+                    <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
+                  )
+                }
+              />
 
-          <Command>Enter Request Action</Command>
-          <Input
-            ref={inputRef}
-            placeholder={'Enter a message'}
-            rightAddon={
-              <InputFormButton type='button' onClick={onSubmit}>
-                <Icon name='send' size={20} />
-              </InputFormButton>
-            }
-          />
-          <Result
-            status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
-            style={{ marginBottom: '2rem' }}
-          >
-            {resultMessage[fileLoadedStatus]}
-          </Result>
+              <Command>Enter Request Action</Command>
+              <Input
+                ref={inputRef}
+                placeholder={'Enter a message'}
+                rightAddon={
+                  <InputFormButton type='button' onClick={onInputSubmit}>
+                    <Icon name='send' size={20} />
+                  </InputFormButton>
+                }
+              />
+              <Result
+                status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
+                style={{ marginBottom: '2rem' }}
+              >
+                {resultMessage[fileLoadedStatus]}
+              </Result>
+            </>
+          )}
 
-          {/* {<Preview forwardedRef={previewRef} />} */}
+          {
+            <Preview
+              forwardedRef={previewRef}
+              handlePreview={handlePreview}
+              setApplyStatus={setFileLoadedStatus}
+              style={{
+                visibility:
+                  fileLoadedStatus === 'preview' ||
+                  fileLoadedStatus === 'edit' ||
+                  fileLoadedStatus === 'submit'
+                    ? 'visible'
+                    : 'hidden',
+              }}
+            />
+          }
+          {fileLoadedStatus === 'preview' && (
+            <>
+              <Request
+                key={requests[requestNumRef.current].request}
+                index={requestNumRef.current}
+                lastIndex={requests.length - 1}
+                item={requests[reqNum]}
+                handlePrevRequest={handlePrevRequest}
+                handleNextRequest={handleNextRequest}
+                selectedRange={parameters?.[requestNumRef.current]}
+                onSubmit={onSubmit}
+              />
+            </>
+          )}
           {/* Output 용 */}
-          {/* <Banner
-            description={'Download'}
-            boldDescription={'edited excel file'}
-            bottomAddon={
-              <BannerBottomAddon>
-                <Button text={'Download'} icon={'download'} onClick={previewRef.current?.save} />
-                <div>
-                  <Button text={'Continue'} icon={'continue'} />
-                  <Button text={'Rollback'} icon={'rollback'} />
-                </div>
-              </BannerBottomAddon>
-            }
-          /> */}
-          {/* <Request
-            key={requests[reqNum].request}
-            index={reqNum}
-            lastIndex={requests.length - 1}
-            item={requests[reqNum]}
-            handlePrevRequest={handlePrevRequest}
-            handleNextRequest={handleNextRequest}
-          /> */}
+          {(fileLoadedStatus === 'edit' || fileLoadedStatus === 'submit') && (
+            <Result
+              status={fileLoadedStatus === 'edit' ? 'loading' : 'info'}
+              style={{ marginBottom: '2rem' }}
+            >
+              {resultMessage[fileLoadedStatus]}
+            </Result>
+          )}
+
+          {fileLoadedStatus === 'submit' && (
+            <Banner
+              description={'Download'}
+              boldDescription={'edited excel file'}
+              bottomAddon={
+                <BannerBottomAddon>
+                  <Button text={'Download'} icon={'download'} onClick={previewRef.current?.save} />
+                  <div>
+                    <Button text={'Continue'} icon={'continue'} />
+                    <Button text={'Rollback'} icon={'rollback'} />
+                  </div>
+                </BannerBottomAddon>
+              }
+              style={{ marginTop: 0 }}
+            />
+          )}
         </Contents>
         <Guides />
       </Container>

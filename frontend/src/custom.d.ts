@@ -18,7 +18,7 @@ interface RequestType {
   type: string;
 }
 
-type FileLoadedStatusType = 'ready' | 'loading' | 'loaded';
+type FileLoadedStatusType = 'ready' | 'loading' | 'loaded' | 'preview' | 'edit' | 'submit';
 
 declare module '*.svg' {
   import React = require('react');

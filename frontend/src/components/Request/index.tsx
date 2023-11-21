@@ -4,6 +4,7 @@ import { ReactComponent as ArrowUp } from '../../assets/icons/arrow-up.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icons/arrow-down.svg';
 import Badge from '../Badge';
 import Input from '../Input';
+import Button from '../Button';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   item: RequestType;
@@ -11,36 +12,54 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   lastIndex: number;
   handlePrevRequest?: () => void;
   handleNextRequest?: () => void;
+  selectedRange?: string;
+  onSubmit?: () => void;
 }
 
-function Request({ index, item, lastIndex, handleNextRequest, handlePrevRequest, ...rest }: Props) {
+function Request({
+  index,
+  item,
+  lastIndex,
+  selectedRange,
+  handleNextRequest,
+  handlePrevRequest,
+  onSubmit,
+  ...rest
+}: Props) {
   return (
     <RequestContainer {...rest}>
-      <>
-        <RequestBlock>
-          <QuestionBlock>
-            <span>
-              {`${index + 1}. `}
-              {item.request}
-            </span>
-            <Badge theme={themeByType[item.type]}>
-              {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
-            </Badge>
-          </QuestionBlock>
-          <InputField>
-            <span>사용자 지정 범위: </span>
-            <Input />
-          </InputField>
-        </RequestBlock>
-        <ArrowButtons>
-          <Button disabled={index === 0} onClick={handlePrevRequest}>
-            <ArrowUp />
-          </Button>
-          <Button disabled={index === lastIndex} onClick={handleNextRequest}>
-            <ArrowDown />
-          </Button>
-        </ArrowButtons>
-      </>
+      <RequestBlock>
+        <QuestionBlock>
+          <span>
+            {`${index + 1}. `}
+            {item.request}
+          </span>
+          <Badge theme={themeByType[item.type]}>
+            {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+          </Badge>
+        </QuestionBlock>
+        <InputField>
+          <span>사용자 지정 범위: </span>
+          <Input value={selectedRange ?? ''} readOnly />
+        </InputField>
+      </RequestBlock>
+      {index === lastIndex && (
+        <Button
+          text={'Submit'}
+          icon={'send'}
+          color={'primary'}
+          style={{ marginRight: '1.5rem', alignSelf: 'flex-end' }}
+          onClick={onSubmit}
+        />
+      )}
+      <ArrowButtons>
+        <ArrowButton disabled={index === 0} onClick={handlePrevRequest}>
+          <ArrowUp />
+        </ArrowButton>
+        <ArrowButton disabled={index === lastIndex} onClick={handleNextRequest}>
+          <ArrowDown />
+        </ArrowButton>
+      </ArrowButtons>
     </RequestContainer>
   );
 }
@@ -62,6 +81,8 @@ const RequestContainer = styled.div`
   display: flex;
   font-size: var(--large);
   font-weight: var(--text);
+  align-items: center;
+  justify-content: center;
 `;
 
 const RequestBlock = styled.div`
@@ -92,7 +113,7 @@ const ArrowButtons = styled.div`
   flex-direction: column;
 `;
 
-const Button = styled.button<{ disabled: boolean }>`
+const ArrowButton = styled.button<{ disabled: boolean }>`
   cursor: pointer;
   border: none;
   box-shadow: none;
