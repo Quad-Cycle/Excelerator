@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { ChangeEvent, useState, useRef } from 'react';
+import React, { ChangeEvent, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Guides from '../components/Guides';
@@ -15,12 +15,16 @@ import Preview from '../components/Preview';
 import Result from '../components/Result';
 import * as XLSX from 'xlsx';
 import { useRecoilState } from 'recoil';
-import { spreadState, selectedFileState } from '../store/spread';
+import { spreadState, selectedFileState, FileLoadedState } from '../store/spread';
 import InputButton from '../components/InputButton';
+import { resultMessage } from '../utils/common';
+import axios from 'axios';
 
 function Main() {
   const previewRef = useRef<{ save: () => void }>({ save: () => {} });
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
+  const [fileLoadedStatus, setFileLoadedStatus] = useRecoilState(FileLoadedState);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   // 임시 데이터
   const [reqNum, setReqNum] = useState(0);
@@ -46,6 +50,18 @@ function Main() {
     selectedFile && setSelectedFile(selectedFile);
   }
 
+  function onSubmit() {
+    const enteredText = inputRef.current!.value;
+    if (selectedFile && enteredText !== '') {
+      console.log(enteredText);
+      setFileLoadedStatus('loading');
+
+      axios.get('/api/text', { params: { text: enteredText } }).then((res) => {
+        console.log(res.data.data);
+      });
+    }
+  }
+
   return (
     <MainBlock>
       <Container>
@@ -59,17 +75,36 @@ function Main() {
             description={'Upload your'}
             boldDescription={'excel file'}
             bottomAddon={
-              <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
+              selectedFile ? (
+                <InputButton
+                  text={selectedFile.name}
+                  icon={'clip'}
+                  onChange={onSelectedFileChange}
+                />
+              ) : (
+                <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
+              )
             }
           />
 
-          {/* <Command>Enter Request Action</Command> */}
-          {/* <Input placeholder={'Enter a message'} rightAddon={<Icon name='send' size={20} />} /> */}
-          {/* <Result style={{ marginBottom: '2rem' }}>
-            언어 모델 처리 및 분석 중입니다. 잠시만 기다려 주세요.
-          </Result> */}
+          <Command>Enter Request Action</Command>
+          <Input
+            ref={inputRef}
+            placeholder={'Enter a message'}
+            rightAddon={
+              <InputFormButton type='button' onClick={onSubmit}>
+                <Icon name='send' size={20} />
+              </InputFormButton>
+            }
+          />
+          <Result
+            status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
+            style={{ marginBottom: '2rem' }}
+          >
+            {resultMessage[fileLoadedStatus]}
+          </Result>
 
-          {<Preview forwardedRef={previewRef} />}
+          {/* {<Preview forwardedRef={previewRef} />} */}
           {/* Output 용 */}
           {/* <Banner
             description={'Download'}
@@ -142,4 +177,14 @@ const BannerBottomAddon = styled.div`
     flex-direction: row;
     gap: 0.5rem;
   }
+`;
+
+const InputFormButton = styled.button`
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
 `;

@@ -29,3 +29,9 @@ export const colors: Record<string, string> = {
   primary: '#2E3192',
   white: '#fff',
 };
+
+export const resultMessage: Record<string, string> = {
+  ready: '수정을 원하는 엑셀 파일과 명령어를 입력하세요.',
+  loading: '언어 모델 처리 및 분석 중입니다. 잠시만 기다려주세요.',
+  loaded: '분석 완료되었습니다. 다음 단계로 이동합니다.',
+};

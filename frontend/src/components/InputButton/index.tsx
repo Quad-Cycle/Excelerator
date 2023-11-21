@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Icon from '../Icon';
 import { textColors, colors } from '../../utils/common';
 
-type ButtonColors = 'white' | 'primary';
+type ButtonColors = 'white' | 'primary' | 'grey';
 
 export interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'color'> {
   text: string;
