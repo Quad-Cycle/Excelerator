@@ -69,11 +69,9 @@ function Preview({ forwardedRef, ...rest }: Props) {
   }, [forwardedRef, save]);
   return (
     <PreviewContainer {...rest}>
-      <div>
         <SpreadSheets workbookInitialized={(spread) => initSpread(spread)} hostStyle={hostStyle}>
           <Worksheet></Worksheet>
         </SpreadSheets>
-      </div>
     </PreviewContainer>
   );
 }
@@ -82,4 +80,5 @@ export default Preview;
 
 const PreviewContainer = styled.div`
   margin: 1.8rem 0;
+  width: 100%;
 `;

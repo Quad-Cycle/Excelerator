@@ -13,7 +13,15 @@ function Icon({ name, color = 'white', size = 24, style, ...rest }: Props) {
   let SelectedIcon = name in images ? images[name as string] : null;
 
   return (
-    <IconWrapper style={{ width: size, height: size, ...style }} {...rest}>
+    <IconWrapper
+      style={{
+        width: size,
+        height: size,
+        animation: name === 'spinner' ? 'rotation 1s linear infinite' : '',
+        ...style,
+      }}
+      {...rest}
+    >
       {SelectedIcon ? (
         <SelectedIcon
           style={{

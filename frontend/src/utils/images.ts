@@ -14,6 +14,7 @@ import { ReactComponent as Send } from '../assets/icons/send.svg';
 import { ReactComponent as Spinner } from '../assets/icons/spinner.svg';
 import { ReactComponent as Upload } from '../assets/icons/upload.svg';
 import { ReactComponent as Continue } from '../assets/icons/continue.svg';
+import { ReactComponent as Clip } from '../assets/icons/clip.svg';
 
 export const images: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   info: Info,
@@ -32,4 +33,5 @@ export const images: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   spinner: Spinner,
   upload: Upload,
   continue: Continue,
+  clip: Clip,
 };

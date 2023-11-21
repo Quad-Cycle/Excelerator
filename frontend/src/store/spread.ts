@@ -10,3 +10,8 @@ export const selectedFileState = atom<File | null>({
   key: 'selectedFile',
   default: null,
 });
+
+export const FileLoadedState = atom<FileLoadedStatusType>({
+  key: 'fileLoaded',
+  default: 'ready',
+});

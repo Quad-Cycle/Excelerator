@@ -47,10 +47,9 @@ const Container = styled.div`
   align-items: center;
   justify-items: center;
   height: 9.375rem;
-  padding-left: 16rem;
-  margin-top: 2rem;
-  padding-right: 3rem;
+  margin-top: 1.5rem;
   width: 100%;
+  padding: 1rem 3rem 1rem 16rem;
 `;
 
 const SpinnerWrapper = styled.div`
@@ -58,12 +57,12 @@ const SpinnerWrapper = styled.div`
 `;
 
 const PictureWrapper = styled.div`
-  position: absolute;
-  top: -2rem;
-  left: 3rem;
-
   svg {
-    width: 10.125rem;
+    position: absolute;
+    left: 3rem;
+    bottom: 0;
+    bottom: 0;
+    height: 110%;
   }
 `;
 

@@ -1,40 +1,58 @@
-import React, { TextareaHTMLAttributes, useRef, ReactElement, cloneElement, Children } from 'react';
+import React, {
+  TextareaHTMLAttributes,
+  forwardRef,
+  useRef,
+  ReactElement,
+  cloneElement,
+  Children,
+} from 'react';
 import styled from 'styled-components';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   rightAddon?: ReactElement;
 }
 
-function TextField({ placeholder = '플레이스 홀더', rightAddon, ...rest }: Props) {
-  const right = rightAddon != null ? Children.only(rightAddon) : null;
-  const textareaRef: React.MutableRefObject<HTMLTextAreaElement | null> = useRef(null);
+// eslint-disable-next-line react/display-name
+const TextField = forwardRef<HTMLTextAreaElement, Props>(
+  ({ placeholder = '플레이스 홀더', rightAddon, ...rest }, ref) => {
+    const right = rightAddon != null ? Children.only(rightAddon) : null;
+    const textareaRef: React.MutableRefObject<HTMLTextAreaElement | null> = useRef(null);
 
-  const handleResizeHeight = () => {
-    if (!textareaRef.current) return;
+    const handleResizeHeight = () => {
+      if (!textareaRef.current) return;
 
-    textareaRef.current.style.height = 'auto';
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
-  };
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    };
 
-  return (
-    <TextFieldWrapper>
-      <textarea
-        ref={textareaRef}
-        placeholder={placeholder}
-        onChange={handleResizeHeight}
-        rows={1}
-        {...rest}
-      />
-      {right != null
-        ? cloneElement(right, {
-            ...right.props,
-            className: 'textarea-icon',
-          })
-        : null}
-    </TextFieldWrapper>
-  );
-}
-
+    return (
+      <TextFieldWrapper>
+        <textarea
+          ref={(inputRef) => {
+            textareaRef.current = inputRef;
+            if (ref) {
+              if (typeof ref === 'function') {
+                ref(inputRef);
+              } else {
+                ref.current = inputRef;
+              }
+            }
+          }}
+          placeholder={placeholder}
+          onChange={handleResizeHeight}
+          rows={1}
+          {...rest}
+        />
+        {right != null
+          ? cloneElement(right, {
+              ...right.props,
+              className: 'textarea-icon',
+            })
+          : null}
+      </TextFieldWrapper>
+    );
+  },
+);
 export default TextField;
 
 type TextFieldWrapperType = Pick<Props, 'rightAddon'>;
