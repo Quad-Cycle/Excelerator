@@ -1,5 +1,5 @@
 {
-    "SUM": [
+	"SUM": [
         {
 			"request": "합을 구할 범위를 지정해주세요",
 			"type":"database"
@@ -10,6 +10,781 @@
 		}
     ],
     "SUMIF": [
-
-    ]
+    	{
+			"request": "조건에 맞는지를 검사할 셀들의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "더할 셀의 조건을 지정하는 수, 식 또는 텍스트를 입력해주세요.",
+			"type": "criteria"
+		},
+    	{
+			"request": "합을 구할 실제 셀들의 범위를 지정해주세요. (생략 가능)",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"ROUND": [
+    	{
+			"request": "반올림하려는 실수를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "반올림하려는 자릿수를 입력해주세요. ",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"ROUNDDOWN": [
+    	{
+			"request": "내림하려는 숫자를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "내림하려는 자릿수를 입력해주세요. ",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"ROUNDUP": [
+    	{
+			"request": "올림하려는 숫자를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "올림하려는 자릿수를 입력해주세요. ",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"INT": [
+    	{
+			"request": "정수로 내림하려는 실수를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"ABS": [
+    	{
+			"request": "절대 값을 구하려는 실수를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"SQRT": [
+    	{
+			"request": "제곱근을 구하려는 수를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"EXP": [
+    	{
+			"request": "밑e에 적용할 지수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"FACT": [
+    	{
+			"request": "팩토리얼 값을 구하려는 수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"PI": [
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"MOD": [
+    	{
+			"request": "나누려는 수를 입력해주세요.",
+			"type": "number"
+		},
+    	{
+			"request": "나누는 수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"PRODUCT": [
+    	{
+			"request": "곱하려는 수의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"SUMPRODUCT": [
+    	{
+			"request": "곱의 합을 구하려는 리스트를 입력해주세요.",
+			"type": "list"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"POWER": [
+    	{
+			"request": "밑수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "지수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"TRUNC": [
+    	{
+			"request": "실수를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "소수점 아래로 남길 자릿수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"AVERAGE": [
+    	{
+			"request": "평균을 구할 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"MAX": [
+    	{
+			"request": "최댓값을 구할 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"MIN": [
+    	{
+			"request": "최솟값을 구할 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"RANK": [
+    	{
+			"request": "순위를 구하려는 셀을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "순위를 구하려는 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "내림차순이면 0, 오름차순이면 0이 아닌 수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"LARGE": [
+    	{
+			"request": "K번째로 큰 값을 결정하는데 필요한 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "범위 내에서 몇 번째로 큰 값을 구할지를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"SMALL": [
+    	{
+			"request": "K번째로 작은 값을 결정하는데 필요한 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "범위 내에서 몇 번째로 작은 값을 구할지를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"COUNT": [
+    	{
+			"request": "숫자가 포함된 셀의 개수를 구하고자 하는 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"COUNTA": [
+    	{
+			"request": "비어 있지 않은 셀의 개수를 구하고자 하는 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"COUNTBLANK": [
+    	{
+			"request": "비어 있는 셀의 개수를 구하고자 하는 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"COUNTIF": [
+    	{
+			"request": "조건에 맞는 셀의 개수를 구하고자 하는 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DSUM": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "합계를 구해야 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "합계를 구해야 하는 열조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DAVERAGE": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "평균을 구해야 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "평균을 구해야 하는 열조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DMAX": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "최댓값를 찾아야 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "최댓값를 찾아야 하는 열조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DMIN": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "최솟값를 찾아야 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "최솟값를 찾아야 하는 열조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DCOUNT": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "셀의 개수를 구하고자 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "셀의 개수를 구하고자 하는 열조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DGET": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "찾고자 하는 값이 있는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "찾고자 하는 값의 조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DPRODUCT": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "곱하고자 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "곱하고자 하는 값의 조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DSTDEV": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "표준편차를 구하고자 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "표준편차를 구하고자 하는 값의 조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"DVAR": [
+    	{
+			"request": "데이터베이스의 범위를 지정해주세요.",
+			"type": "range"
+		},
+		{
+			"request": "분산을 구하고자 하는 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "분산을 구하고자 하는 값의 조건을 숫자, 식, 텍스트 형식으로 입력해주세요.",
+			"type": "criteria"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"ISERROR": [
+    	{
+			"request": "오류를 확인하고자 하는 셀을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"FIND": [
+    	{
+			"request": "찾으려는 텍스트를 입력해주세요.",
+			"type": "text"
+		},
+		{
+			"request": "찾으려는 텍스트가 포함된 텍스트를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "찾기 시작할 문자의 위치를 입력해주세요. (생략가능)",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"SEARCH": [
+    	{
+			"request": "찾으려는 텍스트를 입력해주세요.",
+			"type": "text"
+		},
+		{
+			"request": "찾으려는 텍스트가 포함된 텍스트를 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "찾기 시작할 문자의 위치를 입력해주세요. (생략가능)",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"MID": [
+    	{
+			"request": "문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "돌려줄 문자열의 첫번째 위치를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "돌려줄 문자 개수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"LEFT": [
+    	{
+			"request": "문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "왼쪽에서 추출할 문자 수를 입력해주세요. (생략가능)",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"RIGHT": [
+    	{
+			"request": "문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "오른쪽에서 추출할 문자 수를 입력해주세요. (생략가능)",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"LOWER": [
+    	{
+			"request": "소문자로 바꾸려는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"UPPER": [
+    	{
+			"request": "대문자로 바꾸려는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"PROPER": [
+    	{
+			"request": "각 단어의 첫째 문자를 대문자로 변환하고 나머지는 소문자로 바꾸려는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"TRIM": [
+    	{
+			"request": "공백을 제거할 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"LEN": [
+    	{
+			"request": "문자 개수를 구하고자 하는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"REPLACE": [
+    	{
+			"request": "일부분을 바꾸려는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "바꾸기를 시작할 위치를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "바꾸려는 문자의 개수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "대체할 문자열을 입력해주세요.",
+			"type": "text"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"CONCATENATE": [
+		{
+			"request": "합칠 문자열을 리스트 형식으로 입력해주세요.",
+			"type": "list"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"REPT": [
+    	{
+			"request": "반복할 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "반복 횟수를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"VALUE": [
+    	{
+			"request": "숫자로 바꾸려는 문자열을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "답을 입력할 곳을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"VLOOKUP": [
+		{
+			"request": "값을 찾을 범위를 지정해주세요.",
+			"type": "range"
+		},
+    	{
+			"request": "첫번째 열에서 찾으려는 값이 있는 셀을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "값을 추출할 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "정확하게 일치하는 값을 찾으려면 FALSE, 비슷한 값을 찾으려면 TRUE(생략가능)을 입력해주세요.",
+			"type": "boolean"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"HLOOKUP": [
+		{
+			"request": "값을 찾을 범위를 지정해주세요.",
+			"type": "range"
+		},
+    	{
+			"request": "첫번째 행에서 찾으려는 값이 있는 셀을 지정해주세요.",
+			"type": "cell"
+		},
+		{
+			"request": "값을 추출할 행 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "정확하게 일치하는 값을 찾으려면 FALSE, 비슷한 값을 찾으려면 TRUE(생략가능)을 입력해주세요.",
+			"type": "boolean"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"CHOOSE": [
+		{
+			"request": "인수 목록 중 고를 인수의 위치를 입력해주세요. (1~254)",
+			"type": "number"
+		},
+    	{
+			"request": "수, 셀 참조, 수식, 함수, 텍스트 등을 리스트 형식으로 입력해주세요.",
+			"type": "list"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"INDEX": [
+		{
+			"request": "범위를 지정해주세요.",
+			"type": "range"
+		},
+    	{
+			"request": "출력할 값의 행 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "축력할 값의 열 번호를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"MATCH": [
+		{
+			"request": "찾을 값을 검색할 범위를 지정해주세요. (단, 범위의 행과 열의 넓이 중 하나는 반드시 '1'이여야 합니다.)",
+			"type": "range"
+		},
+    	{
+			"request": "범위에서 찾을 값를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "찾을 값을 검색할 방법으로 1, 0, -1 값 중 하나를 입력해주세요. (기본값은 '1')\n1 : 찾을값보다 작거나 같은값 중 가장 큰 값을 찾습니다. 범위는 반드시 오름차순으로 정렬되어야 합니다.\n0 : 찾을값과 정확히 일치하는 값을 찾습니다. 정렬순서와 상관없이 동작합니다.\n-1 : 찾을값보다 크거나 같은값 중 가장 작은 값을 찾습니다. 범위는 반드시 내림차순으로 정렬되어야 합니다.",
+			"type": "number"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	],
+	"OFFSET": [
+		{
+			"request": "참조 할 시작지점을 지정해주세요. ",
+			"type": "cell"
+		},
+    	{
+			"request": "시작셀 기준, 아래로 몇 칸을 이동할지 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "시작셀 기준, 오른쪽으 몇 칸을 이동할지 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "행/열로 이동한 위치에서, 아래로 확장할 범위를 입력해주세요.",
+			"type": "number"
+		},
+    	{
+			"request": "행/열로 이동한 위치에서, 오른쪽로 확장할 범위를 입력해주세요.",
+			"type": "number"
+		},
+		{
+			"request": "결과가 입력될 셀을 지정해주세요",
+			"type": "cell"
+		}
+	]
 }
