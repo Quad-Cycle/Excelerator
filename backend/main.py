@@ -6,12 +6,9 @@ import Question
 
 app = FastAPI()
 
-class Text(BaseModel):
-    text: str
-
-@app.get("/text")
-async def classify_text(text: Text):
-    label = GPT2Model.find_classification(text.text)
+@app.get("/api/text")
+async def classify_text(text: str):
+    label = GPT2Model.find_classification(text)
     question = Question.find_question(label)
 
     return {"label": label, "question": question}
