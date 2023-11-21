@@ -18,6 +18,7 @@ import { useRecoilState } from 'recoil';
 import { spreadState, selectedFileState, FileLoadedState } from '../store/spread';
 import InputButton from '../components/InputButton';
 import { resultMessage } from '../utils/common';
+import axios from 'axios';
 
 function Main() {
   const previewRef = useRef<{ save: () => void }>({ save: () => {} });
@@ -54,6 +55,10 @@ function Main() {
     if (selectedFile && enteredText !== '') {
       console.log(enteredText);
       setFileLoadedStatus('loading');
+
+      axios.get('/api/text', { params: { text: enteredText } }).then((res) => {
+        console.log(res.data.data);
+      });
     }
   }
 
