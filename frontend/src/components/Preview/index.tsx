@@ -92,7 +92,6 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
     let selection = args.newSelections.pop();
     if (!selection) return;
     const selected = indicesToExcelRange(selection);
-    // console.log(selected);
     handlePreview(selected);
   };
 

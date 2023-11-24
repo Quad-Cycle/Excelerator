@@ -40,7 +40,10 @@ function Request({
         </QuestionBlock>
         <InputField>
           <span>사용자 지정 범위: </span>
-          <Input value={selectedRange ?? ''} readOnly />
+          <Input
+            defaultValue={item.type === 'cell' || item.type === 'range' ? selectedRange : ''}
+            readOnly={item.type === 'cell' || item.type === 'range' ? true : false}
+          />
         </InputField>
       </RequestBlock>
       {index === lastIndex && (

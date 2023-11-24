@@ -14,7 +14,7 @@ import Preview from '../components/Preview';
 import Result from '../components/Result';
 import * as XLSX from 'xlsx';
 import { useRecoilState } from 'recoil';
-import { spreadState, selectedFileState, FileLoadedState } from '../store/spread';
+import { selectedFileState, FileLoadedState } from '../store/spread';
 import InputButton from '../components/InputButton';
 import { resultMessage } from '../utils/common';
 import axios from 'axios';
@@ -52,13 +52,13 @@ function Main() {
   function onSelectedFileChange(e: ChangeEvent<HTMLInputElement>) {
     let selectedFile = e.target?.files?.[0];
     selectedFile && setSelectedFile(selectedFile);
+    setFileLoadedStatus('uploaded');
   }
 
   function onInputSubmit() {
     const enteredText = inputRef.current!.value;
+    setFileLoadedStatus('loading');
     if (selectedFile && enteredText !== '') {
-      setFileLoadedStatus('loading');
-
       axios.get('/api/text', { params: { text: enteredText } }).then((res) => {
         if (!res?.data) return;
 
@@ -82,6 +82,7 @@ function Main() {
     setParameters((prevParameters) => {
       const changed = [...prevParameters];
       changed[requestNumRef.current] = range;
+      console.log(changed);
       return changed;
     });
   };
@@ -100,29 +101,51 @@ function Main() {
       <Container>
         <Nav />
         <Contents>
-          <LogoWrapper>
+          <LogoWrapper onClick={() => window.location.reload()}>
             <Logo />
           </LogoWrapper>
           {(fileLoadedStatus === 'ready' ||
+            fileLoadedStatus === 'uploaded' ||
+            fileLoadedStatus === 'loaded' ||
+            fileLoadedStatus === 'loading') && (
+            <Banner
+              description={'Upload your'}
+              boldDescription={'excel file'}
+              bottomAddon={
+                selectedFile ? (
+                  <InputButton
+                    text={selectedFile.name}
+                    icon={'clip'}
+                    onChange={onSelectedFileChange}
+                  />
+                ) : (
+                  <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
+                )
+              }
+            />
+          )}
+          {
+            <Preview
+              forwardedRef={previewRef}
+              handlePreview={handlePreview}
+              setApplyStatus={setFileLoadedStatus}
+              style={{
+                display:
+                  fileLoadedStatus === 'uploaded' ||
+                  fileLoadedStatus === 'preview' ||
+                  fileLoadedStatus === 'edit' ||
+                  fileLoadedStatus === 'submit'
+                    ? 'block'
+                    : 'none',
+              }}
+            />
+          }
+
+          {(fileLoadedStatus === 'ready' ||
+            fileLoadedStatus === 'uploaded' ||
             fileLoadedStatus === 'loaded' ||
             fileLoadedStatus === 'loading') && (
             <>
-              <Banner
-                description={'Upload your'}
-                boldDescription={'excel file'}
-                bottomAddon={
-                  selectedFile ? (
-                    <InputButton
-                      text={selectedFile.name}
-                      icon={'clip'}
-                      onChange={onSelectedFileChange}
-                    />
-                  ) : (
-                    <InputButton text={'Upload'} icon={'upload'} onChange={onSelectedFileChange} />
-                  )
-                }
-              />
-
               <Command>Enter Request Action</Command>
               <Input
                 ref={inputRef}
@@ -133,30 +156,20 @@ function Main() {
                   </InputFormButton>
                 }
               />
-              <Result
-                status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
-                style={{ marginBottom: '2rem' }}
-              >
-                {resultMessage[fileLoadedStatus]}
-              </Result>
             </>
           )}
 
-          {
-            <Preview
-              forwardedRef={previewRef}
-              handlePreview={handlePreview}
-              setApplyStatus={setFileLoadedStatus}
-              style={{
-                visibility:
-                  fileLoadedStatus === 'preview' ||
-                  fileLoadedStatus === 'edit' ||
-                  fileLoadedStatus === 'submit'
-                    ? 'visible'
-                    : 'hidden',
-              }}
-            />
-          }
+          {(fileLoadedStatus === 'ready' ||
+            fileLoadedStatus === 'loaded' ||
+            fileLoadedStatus === 'loading') && (
+            <Result
+              status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
+              style={{ marginBottom: '2rem', marginTop: '2rem' }}
+            >
+              {resultMessage[fileLoadedStatus]}
+            </Result>
+          )}
+
           {fileLoadedStatus === 'preview' && (
             <>
               <Request
@@ -172,7 +185,7 @@ function Main() {
             </>
           )}
           {/* Output 용 */}
-          {(fileLoadedStatus === 'edit' || fileLoadedStatus === 'submit') && (
+          {fileLoadedStatus === 'edit' && (
             <Result
               status={fileLoadedStatus === 'edit' ? 'loading' : 'info'}
               style={{ marginBottom: '2rem' }}
@@ -233,6 +246,7 @@ const Contents = styled.section`
 `;
 
 const LogoWrapper = styled.div`
+  cursor: pointer;
   svg {
     width: 12rem;
   }
