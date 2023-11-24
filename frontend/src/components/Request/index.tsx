@@ -3,8 +3,8 @@ import { styled } from 'styled-components';
 import { ReactComponent as ArrowUp } from '../../assets/icons/arrow-up.svg';
 import { ReactComponent as ArrowDown } from '../../assets/icons/arrow-down.svg';
 import Badge from '../Badge';
-import Input from '../Input';
 import Button from '../Button';
+import RequestInput from './RequestInput';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   item: RequestType;
@@ -40,10 +40,7 @@ function Request({
         </QuestionBlock>
         <InputField>
           <span>사용자 지정 범위: </span>
-          <Input
-            defaultValue={item.type === 'cell' || item.type === 'range' ? selectedRange : ''}
-            readOnly={item.type === 'cell' || item.type === 'range' ? true : false}
-          />
+          <RequestInput type={item.type} selectedRange={selectedRange} />
         </InputField>
       </RequestBlock>
       {index === lastIndex && (
@@ -107,6 +104,9 @@ const QuestionBlock = styled.div`
 
 const InputField = styled.div`
   margin-left: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `;
 
 const ArrowButtons = styled.div`

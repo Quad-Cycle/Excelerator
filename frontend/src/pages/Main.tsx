@@ -82,7 +82,6 @@ function Main() {
     setParameters((prevParameters) => {
       const changed = [...prevParameters];
       changed[requestNumRef.current] = range;
-      console.log(changed);
       return changed;
     });
   };
@@ -95,6 +94,20 @@ function Main() {
       parameters[parameters.length - 1],
     );
   };
+
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
 
   return (
     <MainBlock>
