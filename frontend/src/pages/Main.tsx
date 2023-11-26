@@ -22,9 +22,11 @@ function Main() {
   const previewRef = useRef<{
     save: () => void;
     applyFormula: (func: string, parameters: string[], cell: string) => void;
+    resetFormula: (cell: string) => void;
   }>({
     save: () => {},
     applyFormula: () => {},
+    resetFormula: () => {},
   });
   const requestNumRef = useRef<number>(0);
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
@@ -77,6 +79,17 @@ function Main() {
     }
   }
 
+  const initProcess = () => {
+    setFileLoadedStatus('uploaded');
+    setReqNum(0);
+    requestNumRef.current = 0;
+  };
+
+  const rollback = () => {
+    previewRef.current?.resetFormula(parameters[parameters.length - 1]);
+    initProcess();
+  };
+
   const handlePreview = (range: string) => {
     setParameters((prevParameters) => {
       const changed = [...prevParameters];
@@ -87,7 +100,6 @@ function Main() {
 
   const onSubmit = () => {
     setFileLoadedStatus('edit');
-    console.log(parameters);
     previewRef.current?.applyFormula(
       excelFunc,
       parameters.slice(0, -1),
@@ -216,8 +228,8 @@ function Main() {
                 <BannerBottomAddon>
                   <Button text={'Download'} icon={'download'} onClick={previewRef.current?.save} />
                   <div>
-                    <Button text={'Continue'} icon={'continue'} />
-                    <Button text={'Rollback'} icon={'rollback'} />
+                    <Button text={'Continue'} icon={'continue'} onClick={initProcess} />
+                    <Button text={'Rollback'} icon={'rollback'} onClick={rollback} />
                   </div>
                 </BannerBottomAddon>
               }

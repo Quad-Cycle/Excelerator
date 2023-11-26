@@ -12,6 +12,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   forwardedRef: MutableRefObject<{
     save: () => void;
     applyFormula: (func: string, parameters: string[], cell: string) => void;
+    resetFormula: (cell: string) => void;
   }>;
   handlePreview: (range: string) => void;
   setApplyStatus: SetterOrUpdater<FileLoadedStatusType>;
@@ -19,6 +20,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 
 function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props) {
   const [spread, setSpread] = useState<GC.Spread.Sheets.Workbook | null>(null);
+  const [lastValue, setLastValue] = useState<any>(null);
   const selectedFile = useRecoilValue(selectedFileState);
 
   const fileType = FileType.Excel;
@@ -63,8 +65,26 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
   const applyFormula = (func: string, parameters: string[], cell: string) => {
     const sheet = spread?.getActiveSheet();
     const resultCell = excelCellToIndex(cell);
+    if (func === 'VLOOKUP' || func === 'HLOOKUP' || func === 'MATCH') {
+      [parameters[0], parameters[1]] = [parameters[1], parameters[2]];
+    }
+    setLastValue(sheet?.getValue(resultCell[0], resultCell[1]) || '');
     sheet?.setFormula(resultCell[0], resultCell[1], `=${func}(${parameters.join(', ')})`);
     setApplyStatus('submit');
+  };
+
+  const resetFormula = (cell: string) => {
+    const sheet = spread?.getActiveSheet();
+    const resultCell = excelCellToIndex(cell);
+    sheet?.clear(
+      resultCell[0],
+      resultCell[1],
+      1,
+      1,
+      GC.Spread.Sheets.SheetArea.viewport,
+      GC.Spread.Sheets.StorageType.data,
+    );
+    sheet?.setValue(resultCell[0], resultCell[1], lastValue);
   };
 
   function excelCellToIndex(cell: string) {
@@ -128,6 +148,7 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
       forwardedRef.current = {
         save,
         applyFormula,
+        resetFormula,
       };
     }
   }, [forwardedRef, save, applyFormula]);
