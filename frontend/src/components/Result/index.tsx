@@ -33,8 +33,8 @@ const ResultContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
   flex-direction: column;
   gap: 1rem;
 

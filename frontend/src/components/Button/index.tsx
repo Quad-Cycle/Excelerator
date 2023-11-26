@@ -15,7 +15,7 @@ function Button({ text, color = 'white', icon, ...rest }: Props) {
   const buttonColor = color;
   const lineColor = color === 'white' ? 'primary' : 'white';
   return (
-    <ButtonElement buttonColor={buttonColor} lineColor={lineColor} {...rest}>
+    <ButtonElement buttoncolor={buttonColor} linecolor={lineColor} {...rest}>
       {icon && <Icon name={icon} color={lineColor} />}
       <span>{text}</span>
     </ButtonElement>
@@ -24,11 +24,11 @@ function Button({ text, color = 'white', icon, ...rest }: Props) {
 
 export default Button;
 
-const ButtonElement = styled.button<{ buttonColor: ButtonColors; lineColor: ButtonColors }>`
-  color: ${(props) => textColors[props.lineColor]};
-  border: 1px solid ${(props) => textColors[props.lineColor]};
+const ButtonElement = styled.button<{ buttoncolor: ButtonColors; linecolor: ButtonColors }>`
+  color: ${(props) => textColors[props.linecolor]};
+  border: 1px solid ${(props) => textColors[props.linecolor]};
   box-shadow: none;
-  background: ${(props) => colors[props.buttonColor]};
+  background: ${(props) => colors[props.buttoncolor]};
   overflow: visible;
   cursor: pointer;
   padding: 0.5rem 1.5rem 0.5rem 1.25rem;

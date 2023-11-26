@@ -1,16 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
+import { GITHUB_URL } from '../../utils/common';
 
 function Nav() {
-  const menus = [{ name: 'home' }, { name: 'chat' }, { name: 'github' }, { name: 'rollback' }];
+  const menus = [
+    { name: 'home', clickTrigger: () => window.location.reload() },
+    { name: 'chat', clickTrigger: () => window.open(`${GITHUB_URL}/issues`, '_blank') },
+    {
+      name: 'github',
+      clickTrigger: () => window.open(GITHUB_URL, '_blank'),
+    },
+    { name: 'rollback', clickTrigger: () => window.location.reload() },
+  ];
 
   return (
     <Wrapper>
       <NavBar>
         <ul>
           {menus.map((menu) => (
-            <li key={menu.name}>
+            <li key={menu.name} onClick={menu.clickTrigger}>
               <Icon name={menu.name} size={28} />
             </li>
           ))}
