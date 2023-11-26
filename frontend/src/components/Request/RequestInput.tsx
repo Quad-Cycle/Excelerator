@@ -6,9 +6,10 @@ import Toggle from './ToggleInput';
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   type: ParameterType;
   selectedRange?: string;
+  updateParameters: (value: any) => void;
 }
 
-function RequestInput({ type, selectedRange }: Props) {
+function RequestInput({ type, selectedRange, updateParameters }: Props) {
   switch (type) {
     case 'cell':
     case 'range':
@@ -39,7 +40,7 @@ function RequestInput({ type, selectedRange }: Props) {
     case 'boolean':
       return (
         <InputWrapper>
-          <Toggle />
+          <Toggle updateParameters={updateParameters} />
         </InputWrapper>
       );
     case 'text':

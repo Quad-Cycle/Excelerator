@@ -12,7 +12,6 @@ import Request from '../components/Request';
 import Button from '../components/Button';
 import Preview from '../components/Preview';
 import Result from '../components/Result';
-import * as XLSX from 'xlsx';
 import { useRecoilState } from 'recoil';
 import { selectedFileState, FileLoadedState } from '../store/spread';
 import InputButton from '../components/InputButton';
@@ -88,6 +87,7 @@ function Main() {
 
   const onSubmit = () => {
     setFileLoadedStatus('edit');
+    console.log(parameters);
     previewRef.current?.applyFormula(
       excelFunc,
       parameters.slice(0, -1),
@@ -194,6 +194,7 @@ function Main() {
                 handleNextRequest={handleNextRequest}
                 selectedRange={parameters?.[requestNumRef.current]}
                 onSubmit={onSubmit}
+                setParameters={setParameters}
               />
             </>
           )}
@@ -224,7 +225,7 @@ function Main() {
             />
           )}
         </Contents>
-        <Guides />
+        <Guides paramType={requests[requestNumRef.current]?.type} />
       </Container>
     </MainBlock>
   );

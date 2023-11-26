@@ -29,6 +29,12 @@ type FileLoadedStatusType =
 
 type ParameterType = 'range' | 'cell' | 'number' | 'text' | 'list' | 'criteria' | 'boolean';
 
+interface GuideInfoType {
+  title: string;
+  description: string;
+  color?: ColorType;
+}
+
 declare module '*.svg' {
   import React = require('react');
 

@@ -1,12 +1,16 @@
 import React, { ChangeEvent, useState, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {}
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  updateParameters: (value: any) => void;
+}
 
-function Toggle({ disabled = false, defaultChecked = true, ...rest }: Props) {
+function Toggle({ disabled = false, defaultChecked = true, updateParameters, ...rest }: Props) {
   const [check, setCheck] = useState<boolean>(defaultChecked);
+
   const onChangeToggle = (e: ChangeEvent<HTMLInputElement>) => {
     setCheck(e.target.checked);
+    updateParameters(e.target.checked);
   };
   return (
     <ToggleSwitch check={check}>

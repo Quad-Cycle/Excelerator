@@ -14,6 +14,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   handleNextRequest?: () => void;
   selectedRange?: string;
   onSubmit?: () => void;
+  setParameters: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 function Request({
@@ -23,9 +24,17 @@ function Request({
   selectedRange,
   handleNextRequest,
   handlePrevRequest,
+  setParameters,
   onSubmit,
   ...rest
 }: Props) {
+  const updateParameters = (value: any) => {
+    setParameters((prevParameters) => {
+      const changed = [...prevParameters];
+      changed[index] = value;
+      return changed;
+    });
+  };
   return (
     <RequestContainer {...rest}>
       <RequestBlock>
@@ -40,7 +49,11 @@ function Request({
         </QuestionBlock>
         <InputField>
           <span>사용자 지정 범위: </span>
-          <RequestInput type={item.type} selectedRange={selectedRange} />
+          <RequestInput
+            type={item.type}
+            selectedRange={selectedRange}
+            updateParameters={updateParameters}
+          />
         </InputField>
       </RequestBlock>
       {index === lastIndex && (
