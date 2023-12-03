@@ -59,7 +59,7 @@ type TextFieldWrapperType = Pick<Props, 'rightAddon'>;
 
 const TextFieldWrapper = styled.div<TextFieldWrapperType>`
   position: relative;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 
   .textarea-icon {
     position: absolute;
