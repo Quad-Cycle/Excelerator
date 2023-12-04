@@ -60,7 +60,7 @@ function Main() {
 
   function onInputSubmit() {
     const enteredText = inputRef.current!.value;
-    if (!enteredText || enteredText === '') return;
+    if (!enteredText || enteredText === '' || fileLoadedStatus !== 'uploaded') return;
     setFileLoadedStatus('loading');
     if (selectedFile && enteredText !== '') {
       axios.get('/api/text', { params: { text: enteredText } }).then((res) => {

@@ -97,10 +97,13 @@ function Request({
 export default Request;
 
 const themeByType: Record<string, ColorType> = {
-  database: 'cyan',
-  field: 'geekblue',
-  criteria: 'gold',
-  result: 'magenta',
+  range: 'purple',
+  cell: 'blue',
+  number: 'magenta',
+  text: 'green',
+  criteria: 'cyan',
+  list: 'orange',
+  boolean: 'geekblue',
 };
 
 const RequestContainer = styled.div`
