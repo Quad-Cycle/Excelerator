@@ -23,10 +23,12 @@ function Main() {
     save: () => void;
     applyFormula: (func: string, parameters: string[], cell: string) => void;
     resetFormula: (cell: string) => void;
+    refresh: () => void;
   }>({
     save: () => {},
     applyFormula: () => {},
     resetFormula: () => {},
+    refresh: () => {},
   });
   const requestNumRef = useRef<number>(0);
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
@@ -74,18 +76,21 @@ function Main() {
 
         setTimeout(() => {
           setFileLoadedStatus('preview');
+          previewRef.current?.refresh();
         }, 1000);
       });
     }
   }
 
   const initProcess = () => {
-    setFileLoadedStatus('uploaded');
+    previewRef.current?.refresh();
+    setFileLoadedStatus('restored');
     setReqNum(0);
     requestNumRef.current = 0;
   };
 
   const rollback = () => {
+    previewRef.current?.refresh();
     previewRef.current?.resetFormula(parameters[parameters.length - 1]);
     initProcess();
   };
@@ -129,10 +134,7 @@ function Main() {
           <LogoWrapper onClick={() => window.location.reload()}>
             <Logo />
           </LogoWrapper>
-          {(fileLoadedStatus === 'ready' ||
-            fileLoadedStatus === 'uploaded' ||
-            fileLoadedStatus === 'loaded' ||
-            fileLoadedStatus === 'loading') && (
+          {(fileLoadedStatus === 'ready' || fileLoadedStatus === 'uploaded') && (
             <Banner
               description={'Upload your'}
               boldDescription={'excel file'}
@@ -159,7 +161,8 @@ function Main() {
                   fileLoadedStatus === 'uploaded' ||
                   fileLoadedStatus === 'preview' ||
                   fileLoadedStatus === 'edit' ||
-                  fileLoadedStatus === 'submit'
+                  fileLoadedStatus === 'submit' ||
+                  fileLoadedStatus === 'restored'
                     ? 'block'
                     : 'none',
               }}
@@ -169,7 +172,8 @@ function Main() {
           {(fileLoadedStatus === 'ready' ||
             fileLoadedStatus === 'uploaded' ||
             fileLoadedStatus === 'loaded' ||
-            fileLoadedStatus === 'loading') && (
+            fileLoadedStatus === 'loading' ||
+            fileLoadedStatus === 'restored') && (
             <>
               <Command>Enter Request Action</Command>
               <Input
@@ -189,7 +193,7 @@ function Main() {
             fileLoadedStatus === 'loading') && (
             <Result
               status={fileLoadedStatus === 'loading' ? 'loading' : 'info'}
-              style={{ marginBottom: '2rem', marginTop: '2rem' }}
+              style={{ marginBottom: '2rem', marginTop: '2rem', flex: 1 }}
             >
               {resultMessage[fileLoadedStatus]}
             </Result>
@@ -265,6 +269,8 @@ const Container = styled.section`
 const Contents = styled.section`
   width: 100%;
   flex: 1;
+  height: 100%;
+  max-height: 100%;
   padding-top: 4rem;
   padding: 4rem 3.5rem 2.5rem 0;
   display: flex;

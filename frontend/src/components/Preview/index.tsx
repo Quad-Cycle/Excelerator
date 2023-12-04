@@ -13,6 +13,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     save: () => void;
     applyFormula: (func: string, parameters: string[], cell: string) => void;
     resetFormula: (cell: string) => void;
+    refresh: () => void;
   }>;
   handlePreview: (range: string) => void;
   setApplyStatus: SetterOrUpdater<FileLoadedStatusType>;
@@ -26,8 +27,8 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
   const fileType = FileType.Excel;
 
   let hostStyle = {
-    width: '100%',
-    height: '300px',
+    width: '97%',
+    height: '100%',
     border: '1px solid darkgray',
   };
 
@@ -85,6 +86,10 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
       GC.Spread.Sheets.StorageType.data,
     );
     sheet?.setValue(resultCell[0], resultCell[1], lastValue);
+  };
+
+  const refresh = () => {
+    spread?.refresh();
   };
 
   function excelCellToIndex(cell: string) {
@@ -149,6 +154,7 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
         save,
         applyFormula,
         resetFormula,
+        refresh,
       };
     }
   }, [forwardedRef, save, applyFormula]);
@@ -171,6 +177,7 @@ export default Preview;
 const PreviewContainer = styled.div`
   margin: 1.8rem 0;
   width: 100%;
+  flex: 1;
 
   #vp,
   table,

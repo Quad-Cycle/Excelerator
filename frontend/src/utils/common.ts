@@ -33,6 +33,7 @@ export const colors: Record<string, string> = {
 export const resultMessage: Record<FileLoadedStatusType, string> = {
   ready: '수정을 원하는 엑셀 파일과 명령어를 입력하세요.',
   uploaded: '',
+  restored: '',
   loading: '언어 모델 처리 및 분석 중입니다. 잠시만 기다려주세요.',
   loaded: '분석 완료되었습니다. 다음 단계로 이동합니다.',
   preview: '작업 사항을 적용 중입니다. 잠시만 기다려주세요.',
@@ -50,6 +51,20 @@ export const guideMessage: Record<string, GuideInfoType[]> = {
     },
   ],
   uploaded: [
+    {
+      title: '엑셀 프리뷰 확인',
+      description:
+        '업로드한 파일의 프리뷰를 확인할 수 있습니다. 프리뷰 문서 내 수정 작업이 가능합니다. 추후 다운로드 시 변경 결과가 반영됩니다.',
+      color: 'blue',
+    },
+    {
+      title: '요청할 엑셀 작업 입력하기',
+      description:
+        '엑셀 파일에서 진행하고 싶은 작업을 입력합니다. 예로, "급여 열의 합계를 구하고 싶어요."와 같이 원하는 작업을 작성합니다.',
+      color: 'green',
+    },
+  ],
+  restored: [
     {
       title: '엑셀 프리뷰 확인',
       description:
