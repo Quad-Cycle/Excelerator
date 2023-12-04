@@ -60,6 +60,7 @@ function Main() {
 
   function onInputSubmit() {
     const enteredText = inputRef.current!.value;
+    if (!enteredText || enteredText === '') return;
     setFileLoadedStatus('loading');
     if (selectedFile && enteredText !== '') {
       axios.get('/api/text', { params: { text: enteredText } }).then((res) => {
@@ -72,7 +73,7 @@ function Main() {
         setFileLoadedStatus('loaded');
         setRequests(questions);
         setExcelFunc(func);
-        setParameters(Array(questions.length).fill(''));
+        setParameters(Array(questions.length).fill(undefined));
 
         setTimeout(() => {
           setFileLoadedStatus('preview');
@@ -104,6 +105,11 @@ function Main() {
   };
 
   const onSubmit = () => {
+    const hasUndefined = parameters.some((item) => item === undefined);
+    if (hasUndefined) {
+      alert('매개변수 입력이 완료되지 않았습니다.');
+      return;
+    }
     setFileLoadedStatus('edit');
     previewRef.current?.applyFormula(
       excelFunc,
@@ -210,7 +216,9 @@ function Main() {
                 handleNextRequest={handleNextRequest}
                 selectedRange={parameters?.[requestNumRef.current]}
                 onSubmit={onSubmit}
+                isFilled={!parameters.some((item) => item === undefined)}
                 setParameters={setParameters}
+                paramValue={parameters[reqNum]}
               />
             </>
           )}
