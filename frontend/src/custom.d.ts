@@ -25,7 +25,8 @@ type FileLoadedStatusType =
   | 'loaded'
   | 'preview'
   | 'edit'
-  | 'submit';
+  | 'submit'
+  | 'restored';
 
 type ParameterType = 'range' | 'cell' | 'number' | 'text' | 'list' | 'criteria' | 'boolean';
 

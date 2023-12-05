@@ -13,6 +13,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     save: () => void;
     applyFormula: (func: string, parameters: string[], cell: string) => void;
     resetFormula: (cell: string) => void;
+    refresh: () => void;
   }>;
   handlePreview: (range: string) => void;
   setApplyStatus: SetterOrUpdater<FileLoadedStatusType>;
@@ -26,8 +27,8 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
   const fileType = FileType.Excel;
 
   let hostStyle = {
-    width: '100%',
-    height: '300px',
+    width: '97%',
+    height: '100%',
     border: '1px solid darkgray',
   };
 
@@ -62,20 +63,31 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
     );
   };
 
-  const applyFormula = (func: string, parameters: string[], cell: string) => {
-    const sheet = spread?.getActiveSheet();
-    const resultCell = excelCellToIndex(cell);
-    if (func === 'VLOOKUP' || func === 'HLOOKUP' || func === 'MATCH') {
-      [parameters[0], parameters[1]] = [parameters[1], parameters[2]];
+  const applyFormula = (func: string, params: string[], cell: string) => {
+    try {
+      const sheet = spread?.getActiveSheet();
+      const resultCell = excelCellToIndex(cell);
+      if (!resultCell) return;
+
+      const parameters = params.map(String);
+
+      if (func === 'VLOOKUP' || func === 'HLOOKUP' || func === 'MATCH') {
+        [parameters[0], parameters[1]] = [parameters[1], parameters[0]];
+      }
+      console.log(parameters, `=${func}(${parameters.join(', ')})`);
+      setLastValue(sheet?.getValue(resultCell[0], resultCell[1]) || '');
+      sheet?.setFormula(resultCell[0], resultCell[1], `=${func}(${parameters.join(', ')})`);
+      setApplyStatus('submit');
+    } catch (err) {
+      alert('다시 시도해주십시오.');
     }
-    setLastValue(sheet?.getValue(resultCell[0], resultCell[1]) || '');
-    sheet?.setFormula(resultCell[0], resultCell[1], `=${func}(${parameters.join(', ')})`);
-    setApplyStatus('submit');
   };
 
   const resetFormula = (cell: string) => {
     const sheet = spread?.getActiveSheet();
     const resultCell = excelCellToIndex(cell);
+    if (!resultCell) return;
+
     sheet?.clear(
       resultCell[0],
       resultCell[1],
@@ -87,8 +99,21 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
     sheet?.setValue(resultCell[0], resultCell[1], lastValue);
   };
 
+  const refresh = () => {
+    spread?.refresh();
+
+    let sheet = spread?.getActiveSheet();
+    if (!sheet) return;
+
+    sheet.options.selectionBackColor = 'rgba(204,255,51, 0.3)';
+    sheet.options.selectionBorderColor = 'Accent 3 -40';
+    // sheet.selectionPolicy(2);
+  };
+
   function excelCellToIndex(cell: string) {
     const match = cell.match(/([A-Z]+)(\d+)/);
+    if (!cell) return;
+
     if (!match) {
       throw new Error('Invalid Excel cell format');
     }
@@ -113,6 +138,11 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
     if (!selection) return;
     const selected = indicesToExcelRange(selection);
     handlePreview(selected);
+
+    // let sheet = spread?.getActiveSheet();
+    // if (!sheet) return;
+    // sheet.addSelection(selection.row, selection.col, selection.rowCount, selection.colCount);
+    // sheet.addSelection(4, 3, 2, 2);
   };
 
   function indicesToExcelCell(row: number, col: number): string {
@@ -149,9 +179,10 @@ function Preview({ forwardedRef, handlePreview, setApplyStatus, ...rest }: Props
         save,
         applyFormula,
         resetFormula,
+        refresh,
       };
     }
-  }, [forwardedRef, save, applyFormula]);
+  }, [forwardedRef, save, applyFormula, resetFormula, refresh]);
 
   return (
     <PreviewContainer {...rest}>
@@ -171,6 +202,7 @@ export default Preview;
 const PreviewContainer = styled.div`
   margin: 1.8rem 0;
   width: 100%;
+  flex: 1;
 
   #vp,
   table,

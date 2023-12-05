@@ -15,6 +15,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   selectedRange?: string;
   onSubmit?: () => void;
   setParameters: React.Dispatch<React.SetStateAction<string[]>>;
+  isFilled?: boolean;
+  paramValue?: any;
 }
 
 function Request({
@@ -26,6 +28,8 @@ function Request({
   handlePrevRequest,
   setParameters,
   onSubmit,
+  isFilled,
+  paramValue,
   ...rest
 }: Props) {
   const updateParameters = (value: any) => {
@@ -35,6 +39,17 @@ function Request({
       return changed;
     });
   };
+
+  const labels = {
+    range: '사용자 지정 범위',
+    cell: '사용자 지정 셀',
+    number: '사용자 지정 숫자',
+    text: '사용자 지정 텍스트',
+    boolean: '사용자 지정 불리언 값',
+    criteria: '사용자 지정 조건',
+    list: '사용자 지정 리스트',
+  };
+
   return (
     <RequestContainer {...rest}>
       <RequestBlock>
@@ -48,11 +63,12 @@ function Request({
           </Badge>
         </QuestionBlock>
         <InputField>
-          <span>사용자 지정 범위: </span>
+          <span>{labels[item.type]}: </span>
           <RequestInput
             type={item.type}
             selectedRange={selectedRange}
             updateParameters={updateParameters}
+            value={paramValue}
           />
         </InputField>
       </RequestBlock>
@@ -63,6 +79,7 @@ function Request({
           color={'primary'}
           style={{ marginRight: '1.5rem', alignSelf: 'flex-end' }}
           onClick={onSubmit}
+          disabled={!isFilled}
         />
       )}
       <ArrowButtons>
@@ -80,10 +97,13 @@ function Request({
 export default Request;
 
 const themeByType: Record<string, ColorType> = {
-  database: 'cyan',
-  field: 'geekblue',
-  criteria: 'gold',
-  result: 'magenta',
+  range: 'purple',
+  cell: 'blue',
+  number: 'magenta',
+  text: 'green',
+  criteria: 'cyan',
+  list: 'orange',
+  boolean: 'geekblue',
 };
 
 const RequestContainer = styled.div`

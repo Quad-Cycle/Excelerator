@@ -44,4 +44,9 @@ const ButtonElement = styled.button<{ buttoncolor: ButtonColors; linecolor: Butt
   &:hover {
     background: var(--primary3, #f6faff);
   }
+
+  &:disabled {
+    background: var(--grey1);
+    cursor: not-allowed;
+  }
 `;
