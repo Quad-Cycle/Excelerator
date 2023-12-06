@@ -43,7 +43,7 @@ const AlertContent = styled.p`
   font-size: var(--medium);
   font-weight: var(--text);
   margin-top: 0.7rem;
-  line-height: 0.875rem;
+  line-height: 1rem;
   word-break: keep-all;
 `;
 

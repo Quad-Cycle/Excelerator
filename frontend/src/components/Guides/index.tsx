@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Alert from '../Alert';
+import { guideMessage } from '../../utils/common';
+import { useRecoilValue } from 'recoil';
+import { FileLoadedState } from '../../store/spread';
 
-function Guides() {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
+  paramType?: ParameterType;
+}
+
+function Guides({ paramType, ...rest }: Props) {
+  const fileLoadedStatus = useRecoilValue(FileLoadedState);
+
   return (
-    <GuidesPanel>
+    <GuidesPanel {...rest}>
       <PanelTitle>Guides</PanelTitle>
       <AlertContainer>
-        <Alert
-          title={'엑셀 파일 업로드하기'}
-          content={
-            '수정을 원하는 엑셀 파일을 업로드합니다. 파일 확장자는 .xls 혹은 .xlsx만 가능합니다.'
-          }
-          theme={'blue'}
-        ></Alert>
+        {fileLoadedStatus === 'preview' ? (
+          <>
+            {guideMessage[fileLoadedStatus]?.map((item: GuideInfoType) => (
+              <Alert
+                key={item.title}
+                title={item.title}
+                content={item.description}
+                theme={item.color}
+              ></Alert>
+            ))}
+            {paramType &&
+              guideMessage[paramType]?.map((item: GuideInfoType) => (
+                <Alert
+                  key={item.title}
+                  title={item.title}
+                  content={item.description}
+                  theme={item.color}
+                ></Alert>
+              ))}
+          </>
+        ) : (
+          guideMessage[fileLoadedStatus]?.map((item: GuideInfoType) => (
+            <Alert
+              key={item.title}
+              title={item.title}
+              content={item.description}
+              theme={item.color}
+            ></Alert>
+          ))
+        )}
       </AlertContainer>
     </GuidesPanel>
   );

@@ -16,6 +16,7 @@ koGPT2_TOKENIZER = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
                                                            bos_token=BOS, eos_token=EOS, unk_token='<unk>',
                                                       pad_token=PAD, mask_token=MASK)
 
+
 def find_classification(question):
     question = re.sub(r"\"([?.!,])", r" ", question)
 

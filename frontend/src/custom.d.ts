@@ -15,10 +15,26 @@ type ColorType =
 
 interface RequestType {
   request: string;
-  type: string;
+  type: ParameterType;
 }
 
-type FileLoadedStatusType = 'ready' | 'loading' | 'loaded';
+type FileLoadedStatusType =
+  | 'ready'
+  | 'uploaded'
+  | 'loading'
+  | 'loaded'
+  | 'preview'
+  | 'edit'
+  | 'submit'
+  | 'restored';
+
+type ParameterType = 'range' | 'cell' | 'number' | 'text' | 'list' | 'criteria' | 'boolean';
+
+interface GuideInfoType {
+  title: string;
+  description: string;
+  color?: ColorType;
+}
 
 declare module '*.svg' {
   import React = require('react');
